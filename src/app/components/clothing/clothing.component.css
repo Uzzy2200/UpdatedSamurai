@@ -1,0 +1,63 @@
+.header-container {
+    text-align: center; /* Center the content horizontally */
+  }
+  
+  
+  
+  .vertical-text {
+    font-size: 70px; /* Adjust font size as needed */
+    font-weight: bold;
+    letter-spacing: 5px; /* Adjust spacing between letters as needed */
+    writing-mode: vertical-lr; /* Rotate text to be vertical */
+    text-orientation: upright; /* Keep text orientation upright */
+    line-height: 1; /* Set line-height to 1 to avoid extra spacing */
+    margin-left: 500px;
+    margin-top: 50px;
+  }
+  
+  .short-line {
+    width: 1250px; /* Set the width of the line */
+    margin: 0 auto; /* Center the line horizontally */
+    border: none;
+    border-top: 2px solid black; /* Adjust line style as needed */
+    margin-top: 66px;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 100px;
+  }
+  
+  .clothing-card {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  .clothing-card h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .clothing-card p {
+    font-size: 16px;
+    line-height: 1.6;
+  } 
+  .clothing-image {
+    width: 100%; /* Adjust as needed */
+    height: 200px; /* Set a fixed height for all images */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  
+  
+  
+  /* Add additional styling as needed */
+  

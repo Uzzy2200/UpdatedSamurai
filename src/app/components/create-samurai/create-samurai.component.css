@@ -1,0 +1,127 @@
+.div-text{
+    display: flex;
+    justify-content: center;
+  }
+  .form-Container{
+    display: flex;
+    justify-content: center;
+  }
+  .create-form{
+    width: 60vw;
+    min-width: 15vw;
+  }
+  input[type="text"],
+  input[type="number"],
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .dropdown-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  
+  /* Style for container to align dropdown menus vertically */
+  .dropdown-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .create-button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+  }
+  
+  .create-button:hover {
+    background-color: #000;
+    color: #fff;
+  }
+  .hrtopnav{
+    margin-right: 0;
+    margin-left: 0;
+    width: 100%;
+    height: 0.2vh;
+    background-color: maroon;
+    border: 0.5px solid black;
+  }
+  .div-center-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .samurai-list-container{
+      border: 1px solid black;
+      padding: 2%;
+      padding-top: 0px;
+      margin: 2%;
+      width: 57%;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 1%;
+    }
+    /*in name, description, age and action you can change the specific column properties*/
+    .name{
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+      width: 15%; /* width for name column */
+    }
+    .description{
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+      width: 15%; /* width for description column */
+    }
+    .age{
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+      width: 2%; /* width for age column */
+    }
+    .action{
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+      width: 2%; /* width for action column */
+    }
+    /*in "td" and "th" you can change the color for you table columns*/
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    td{
+      background-color: white;
+      border: 1px solid black;
+    }
+    th{
+      background-color: white;
+    }
+    .btn-delete, .btn-update {
+      padding: 5px 10px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 3px;
+      text-decoration: none;
+    }
+    .btn-delete:hover, .btn-update:hover {
+      background-color: #d32f2f;
+    }
+    
+    .btn-update {
+      background-color: #4CAF50;
+    }
+    
+  

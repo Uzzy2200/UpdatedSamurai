@@ -1,0 +1,17 @@
+<div class="login-container">
+    <h2>ADMIN</h2>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="form-group">
+            <label for="email"></label>
+            <input type="email" id="email" name="email" [required]="loginForm.submitted && loginForm.controls['email'].errors?.['required']" [(ngModel)]="email" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+            <label for="password"></label>
+            <input type="password" id="password" name="password" [required]="loginForm.submitted && loginForm.controls['password'].errors?.['required']" [(ngModel)]="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <button type="submit">Login</button>
+        </div>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    </form>
+</div>

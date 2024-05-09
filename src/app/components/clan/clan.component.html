@@ -1,0 +1,33 @@
+<div class="header-container">
+    <h1 class="vertical-text"><br><br>C<br>L<br>A<br>N</h1>
+    <hr class="short-line">
+  </div>
+  <div class="container">
+    
+    <ng-container *ngFor="let clan of clanList">
+      <div class="clan-card" *ngIf="clan.clanName === 'Minamoto'">
+        <img [src]="'assets/img/' + 'minamoto.png'" alt="Clan Image" class="clan-image">
+        <h2>{{ clan.clanName }}</h2>
+      </div>
+      
+      <div class="clan-card" *ngIf="clan.clanName === 'Taira'">
+        <img [src]="'assets/img/' + 'taira.webp'" alt="Clan Image" class="clan-image">
+        <h2>{{ clan.clanName }}</h2>
+
+      </div>
+  
+      <div class="clan-card" *ngIf="clan.clanName === 'Ouchi'">
+        <img [src]="'assets/img/' + 'ouchi.webp'" alt="Clan Image" class="clan-image">
+        <h2>{{ clan.clanName }}</h2>
+
+      </div>
+      <!-- Add more divs for other armor types -->
+    </ng-container>
+    <div class="samurai-clans">
+        <h1>The most famous samurai clans</h1>
+        <p>
+
+          The most famous samurai clans emerged from the two most substantial feudal conflicts – the Genpei war (1180-1185) and the Warring States Period (1467-1590). Basically, the samurai used to be great warriors of Feudal Japan who deserved respect and fear thanks to their gracefulness in brutality and peace war. They were bound by a strict code of honor and were willing to sacrifice their own lives instead of suffering a harsh existence of dishonor. They existed as the most dominating warriors in Japan for hundreds of years and their success in battles can be traced to their hard work and dedication, and here are some of the most famous samurai clans you need to know.
+        </p>
+      </div>
+  </div>

@@ -1,0 +1,26 @@
+<div class="header-container">
+  <h1 class="vertical-text">A<br>R<br>M<br>O<br>U<br>R</h1>
+  <hr class="short-line">
+</div>
+<div class="container">
+  <ng-container *ngFor="let armour of armourList">
+    <div class="armour-card" *ngIf="armour.armourName === 'Helmet'">
+      <img [src]="'assets/img/' + 'kabuto.jpg'" alt="Armor Image" class="armour-image">
+      <h2>{{ armour.armourName }}</h2>
+      <p>{{ armour.armourDescription }}</p>
+    </div>
+    
+    <div class="armour-card" *ngIf="armour.armourName === 'Menpo'">
+      <img [src]="'assets/img/' + 'menpo.jpg'" alt="Armor Image" class="armour-image">
+      <h2>{{ armour.armourName }}</h2>
+      <p>{{ armour.armourDescription }}</p>
+    </div>
+
+    <div class="armour-card" *ngIf="armour.armourName === 'Sangu'">
+      <img [src]="'assets/img/' + 'sanguu.jpg'" alt="Armor Image" class="armour-image">
+      <h2>{{ armour.armourName }}</h2>
+      <p>{{ armour.armourDescription }}</p>
+    </div>
+    <!-- Add more divs for other armor types -->
+  </ng-container>
+</div>

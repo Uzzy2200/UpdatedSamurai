@@ -1,0 +1,15 @@
+<div class="header-container">
+    <h1 class="vertical-text"><br>H<br>O<br>R<br>S<br>E</h1>
+    <hr class="short-line">
+  </div>
+  <div class="image-container">
+    <img src="assets/img/horse.jpg" alt="Image of a horse">
+  </div>
+  <div class="container">
+    <div class="card-container">
+        <div class="card" *ngFor="let horse of horseList">
+          <h2>{{ horse.horseName }}</h2>
+          <p> {{ horse.description }}</p>    
+        </div>
+      </div>
+      

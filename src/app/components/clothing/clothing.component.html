@@ -1,0 +1,26 @@
+<div class="header-container">
+    <h1 class="vertical-text">C<br>L<br>O<br>T<br>H<br>I<br>N<br>G</h1>
+    <hr class="short-line">
+  </div>
+  <div class="container">
+    <ng-container *ngFor="let clothing of clothingList">
+      <div class="clothing-card" *ngIf="clothing.clothingName === 'Kimono'">
+        <img [src]="'assets/img/' + 'kimono.jpg'" alt="Clothing Image" class="clothing-image">
+        <h2>{{ clothing.clothingName }}</h2>
+        <p>{{ clothing.clothingDescription }}</p>
+      </div>
+      
+      <div class="clothing-card" *ngIf="clothing.clothingName === 'Kataginu'">
+        <img [src]="'assets/img/' + 'kataginu.jpg'" alt="Clothing Image" class="clothing-image">
+        <h2>{{ clothing.clothingName }}</h2>
+        <p>{{ clothing.clothingDescription }}</p>
+      </div>
+  
+      <div class="clothing-card" *ngIf="clothing.clothingName === 'Umanori'">
+        <img [src]="'assets/img/' + 'hakama.jpg'" alt="Clothing Image" class="clothing-image">
+        <h2>{{ clothing.clothingName }}</h2>
+        <p>{{ clothing.clothingDescription }}</p>
+      </div>
+      <!-- Add more divs for other armor types -->
+    </ng-container>
+  </div>
