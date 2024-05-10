@@ -1,6 +1,6 @@
 <div class="div-text">Create Samurai</div>
 <div class="form-Container">
-<form class="create-form" [formGroup]="samuraiForm" action="" (ngSubmit)="Create()">
+  <form class="create-form" [formGroup]="samuraiForm" action="" (ngSubmit)="Create()">
     <input type="text" name="samuraiName" id="samuraiName" placeholder="name" formControlName="samuraiName">
     <small><div *ngIf="samuraiForm.get('samuraiName')?.invalid && samuraiForm.get('samuraiName')?.touched">
       {{error}}
@@ -8,87 +8,88 @@
     <input type="text" name="description" id="description" placeholder="description" formControlName="description">
     <input type="number" name="age" id="age" placeholder="age" formControlName="age">
 
+    <div class="dropdown-container">
+      <div class="DDM-Weapon">Choose Weapon: </div>
+      <select formControlName="weapon">
+        <option value="" disabled selected hidden>Choose Weapon</option>
+        <option value="sword">Weapon: Sword</option>
+        <option value="spear">Weapon: Spear</option>
+        <option value="bow">Weapon: Bow</option>
+      </select>
 
+      <div class="DDM-Faction">Choose Faction: </div>
+      <select formControlName="faction">
+        <option value="" disabled selected hidden>Choose Faction</option>
+        <option value="Tokugawa">Faction: Tokugawa</option>
+        <option value="Oda">Faction: Oda</option>
+        <option value="Takeda">Faction: Takeda</option>
+      </select>
 
+      <div class="DDM-Rank">Choose Rank: </div>
+      <select formControlName="rank">
+        <option value="" disabled selected hidden>Choose Rank</option>
+        <option value="Daimyo">Rank: Daimyo</option>
+        <option value="Ronin">Rank: Ronin</option>
+        <option value="Shogun">Rank: Shogun</option>
+      </select>
 
-  <div class="dropdown-container">
-    <div class="DDM-Weapon">Choose Weapon: </div>
-    <select formControlName="weapon">
-      <option value="" disabled selected hidden>Choose Weapon</option>
-      <option value="sword">Weapon: Sword</option>
-      <option value="spear">Weapon: Spear</option>
-      <option value="bow">Weapon: Bow</option>
-    </select>
-  
-    
-    <div class="DDM-Faction">Choose Faction: </div>
-    <select formControlName="faction">
-      <option value="" disabled selected hidden>Choose Faction</option>
-      <option value="Tokugawa">Faction: Tokugawa</option>
-      <option value="Oda">Faction: Oda</option>
-      <option value="Takeda">Faction: Takeda</option>
-    </select>
-  
-    <div class="DDM-Rank">Choose Rank: </div>
-    <select formControlName="rank">
-      <option value="" disabled selected hidden>Choose Rank</option>
-      <option value="Daimyo">Rank: Daimyo</option>
-      <option value="Ronin">Rank: Ronin</option>
-      <option value="Shogun">Rank: Shogun</option>
-    </select>
-  
-    <div class="DDM-Status">Choose Status: </div>
-    <select formControlName="status">
-      <option value="" disabled selected hidden>Choose Status</option>
-      <option value="Alive">Status: Alive</option>
-      <option value="Deceased">Status: Deceased</option>
-      <option value="Unknown">Status: Unknown</option>
-    </select>
-  </div>  
+      <div class="DDM-Status">Choose Status: </div>
+      <select formControlName="status">
+        <option value="" disabled selected hidden>Choose Status</option>
+        <option value="Alive">Status: Alive</option>
+        <option value="Deceased">Status: Deceased</option>
+        <option value="Unknown">Status: Unknown</option>
+      </select>
+    </div>
 
-  <button class="create-button" type="submit">Create Samurai</button>
-</form>
+    <button class="create-button" type="submit">Create Samurai</button>
+  </form>
 </div>
 
 <div>
   <hr class="hrtopnav"> 
 </div>
 
-
 <div class="div-center-content">
-
   <div class="samurai-list-container">
-    <!-- Display the list of samurais if there is more then Zero(0)-->
     <div *ngIf="samuraiList.length > 0">
       <h2 class="samuraiList">List of Samurais</h2>
       <div *ngFor="let samurai of samuraiList" class="samurai-item">
-        <!-- Samurai information -->
         <table>
-          <thead>
+            <thead>
               <tr>
-                <!--columns for data-->
-                  <th class="name">Name</th>
-                  <th class="description">Description</th>
-                  <th class="age">Age</th>
-                  <th class="action">Action</th>
+                <th class="name">Name</th>
+                <th class="description">Description</th>
+                <th class="age">Age</th>
+                <th class="action">Action</th>
               </tr>
-          </thead>
-          <tbody>
-              <tr>
-                <!--data for columns-->
-                  <td class="name">{{ samurai.samuraiName }}</td>
-                  <td class="description">{{ samurai.description }}</td>
-                  <td class="age">{{ samurai.age }}</td>
-                  <td>
-                    <!-- Pass samuraiId to deleteSamurai method -->
-                    <button type="button" class="btn-delete" (click)="deleteSamurai(samurai.id)">Delete</button>
-                    <!-- Add Update functionality here -->
-                    <button type="submit" class="btn-update">Update</button>
-                  </td>
+            </thead>
+            <tbody>
+              <tr *ngIf="!isEditing || editedSamurai !== samurai">
+                <td class="name">{{ samurai.samuraiName }}</td>
+                <td class="description">{{ samurai.description }}</td>
+                <td class="age">{{ samurai.age }}</td>
+                <td>
+                  <button type="button" class="btn-delete" (click)="deleteSamurai(samurai.samuraiId)">Delete</button>
+                  <button type="button" class="btn-edit" (click)="editSamurai(samurai)">Edit</button>
+                </td>
               </tr>
-              <!-- Add more rows here -->
-          </tbody>
-      </table>
+              <tr *ngIf="isEditing && editedSamurai === samurai">
+                <td colspan="4">
+                  <form [formGroup]="editForm" (ngSubmit)="updateSamurai()">
+                    <input type="text" formControlName="samuraiName" placeholder="Name">
+                    <input type="text" formControlName="description" placeholder="Description">
+                    <input type="number" formControlName="age" placeholder="Age">
+                    <!-- Add dropdowns here -->
+  
+                    <button type="submit" class="update-button">Save Changes</button>
+                    <button type="button" class="cancel-button" (click)="cancelEdit()">Cancel</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

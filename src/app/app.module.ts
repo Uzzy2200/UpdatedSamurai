@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { CreateSamuraiComponent } from './components/create-samurai/create-samurai.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
@@ -38,6 +39,7 @@ import { CreateSamuraiComponent } from './components/create-samurai/create-samur
     FrontpageComponent,
     AdminPageComponent,
     CreateSamuraiComponent,
+    HeaderComponent,
 
 
 

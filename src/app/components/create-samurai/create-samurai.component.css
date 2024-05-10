@@ -1,127 +1,126 @@
-.div-text{
+/* Reset styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container styles */
+.div-center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form container styles */
+.form-Container {
     display: flex;
     justify-content: center;
-  }
-  .form-Container{
-    display: flex;
-    justify-content: center;
-  }
-  .create-form{
-    width: 60vw;
-    min-width: 15vw;
-  }
-  input[type="text"],
-  input[type="number"],
-  button[type="submit"] {
+    margin-bottom: 20px;
+}
+
+.create-form {
+    width: 100%;
+    max-width: 600px; /* Adjust max-width as needed */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.create-form input[type="text"],
+.create-form input[type="number"],
+.create-form button[type="submit"],
+.create-form select {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
-  
-  .dropdown-container select {
+}
+
+/* Table styles */
+.samurai-list-container {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  
-  /* Style for container to align dropdown menus vertically */
-  .dropdown-container {
-    display: flex;
-    flex-direction: column;
+    max-width: 800px; /* Adjust max-width as needed */
     margin-top: 20px;
-  }
-  .create-button {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
-  }
-  
-  .create-button:hover {
-    background-color: #000;
-    color: #fff;
-  }
-  .hrtopnav{
-    margin-right: 0;
-    margin-left: 0;
+}
+
+table {
     width: 100%;
-    height: 0.2vh;
-    background-color: maroon;
-    border: 0.5px solid black;
-  }
-  .div-center-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .samurai-list-container{
-      border: 1px solid black;
-      padding: 2%;
-      padding-top: 0px;
-      margin: 2%;
-      width: 57%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+/* Button styles */
+.btn-delete, .btn-edit, .update-button, .cancel-button {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #ff6347;
+    color: white;
+}
+
+.btn-edit, .update-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #ccc;
+    color: black;
+}
+
+/* Highlight edited row */
+tr.editing td {
+    background-color: #f0f0f0;
+}
+
+/* Edit mode styles */
+.edit-mode {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.edit-mode h2 {
+    margin-bottom: 10px;
+}
+
+.edit-mode input[type="text"],
+.edit-mode input[type="number"],
+.edit-mode select {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.edit-mode button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-mode button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 600px) {
+    .form-Container, .samurai-list-container {
+        width: 100%;
     }
-    table {
-      border-collapse: collapse;
-      margin: 1%;
+
+    .create-form, table {
+        padding: 10px;
     }
-    /*in name, description, age and action you can change the specific column properties*/
-    .name{
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-      width: 15%; /* width for name column */
-    }
-    .description{
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-      width: 15%; /* width for description column */
-    }
-    .age{
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-      width: 2%; /* width for age column */
-    }
-    .action{
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-      width: 2%; /* width for action column */
-    }
-    /*in "td" and "th" you can change the color for you table columns*/
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-    td{
-      background-color: white;
-      border: 1px solid black;
-    }
-    th{
-      background-color: white;
-    }
-    .btn-delete, .btn-update {
-      padding: 5px 10px;
-      background-color: #f44336;
-      color: white;
-      border: none;
-      cursor: pointer;
-      border-radius: 3px;
-      text-decoration: none;
-    }
-    .btn-delete:hover, .btn-update:hover {
-      background-color: #d32f2f;
-    }
-    
-    .btn-update {
-      background-color: #4CAF50;
-    }
-    
-  
+}

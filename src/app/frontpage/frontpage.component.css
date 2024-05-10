@@ -1,112 +1,55 @@
-.header-container {
-  text-align: center; /* Center the content horizontally */
-}
+/*------------BODY-----------*/
 
-
-
-.vertical-text {
-  font-size: 70px; /* Adjust font size as needed */
-  font-weight: bold;
-  letter-spacing: 5px; /* Adjust spacing between letters as needed */
-  writing-mode: vertical-lr; /* Rotate text to be vertical */
-  text-orientation: upright; /* Keep text orientation upright */
-  line-height: 1; /* Set line-height to 1 to avoid extra spacing */
-  margin-left: 500px;
-  margin-top: 50px;
-}
-
-.short-line {
-  width: 1250px; /* Set the width of the line */
-  margin: 0 auto; /* Center the line horizontally */
-  border: none;
-  border-top: 2px solid black; /* Adjust line style as needed */
-  margin-top: 66px;
-}
-
-
-
-/* it puts the cards horizontally, gives 20px space from the sides, place them in the center  */
 .card-menu {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  /* gives margin (space) from top, width and height, radius around the cards */
-  .card {
-    margin-top: 50px;
-    width: 200px;
-    height: 250px;
-    border-radius: 10px;
-    overflow: hidden; /* Ensure image doesn't overflow */
-    position: relative; /* keeps the textbox on the card */
-  }
-  /* gives the size to the img and makes it fit on the card*/
-  .card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-/*it puts the Headers for the cards, like Samurai, Weapon and so on */
-  .card h2 {
-    text-align:start;
-    margin: 0;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    color: white;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
-  
-  
-  .card:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
-    transform: scale(1.1); /* Enlarge the card on hover */
-    z-index: 1; /* Ensure the hovered card appears on top */
-  }
-  
-  .button-container {
-    position: absolute;
-    top: 20px; /* Adjust top spacing as needed */
-    right: 20px; /* Adjust right spacing as needed */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Adjust the gap between cards as needed */
 }
- 
-  
-  /* CSS */
-  .login-button {
-    background-color: #222;
-    border-radius: 4px;
-    border-style: none;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1.5;
-    margin: 0;
-    max-width: none;
-    min-height: 44px;
-    min-width: 10px;
-    outline: none;
-    overflow: hidden;
-    padding: 9px 20px 8px;
-    position: relative;
-    text-align: center;
-    text-transform: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: auto;  }
-  
-  .login-button:hover,
-  .login-button:focus {
-    opacity: .75;
+
+.card {
+  width: 200px; /* Fixed width for cards */
+  height: 250px; /* Fixed height for cards */
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  overflow: hidden; /* Ensure images don't overflow the cards */
+  margin: 0.5%;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Adjust hover effect as needed */
+}
+
+.card img {
+  width: 100%;
+  height: 70%; /* Adjust image height as needed */
+  object-fit: cover; /* Stretch the image to cover the card without maintaining aspect ratio */
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card h2 {
+  margin-top: 10px;
+  font-size: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .card {
+    width: calc(50% - 20px);
+    height: 300px; /* Keep the same height as defined */
   }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: calc(100% - 20px);
+    height: 300px; /* Keep the same height as defined */
+  }
+}
