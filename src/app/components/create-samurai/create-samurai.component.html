@@ -9,31 +9,29 @@
     <input type="number" name="age" id="age" placeholder="age" formControlName="age">
 
     <div class="dropdown-container">
-      <div class="DDM-Weapon">Choose Weapon: </div>
-      <select formControlName="weapon">
-        <option value="" disabled selected hidden>Choose Weapon</option>
-        <option value="sword">Weapon: Sword</option>
-        <option value="spear">Weapon: Spear</option>
-        <option value="bow">Weapon: Bow</option>
-      </select>
+        <div class="DDM-Weapon">Choose Weapon: </div>
+        <select formControlName="weapon">
+            <option value="" disabled selected hidden>Choose Weapon</option>
+            <option *ngFor="let weapon of weapons" [value]="weapon.weaponName">{{ weapon.weaponName }}</option>
+          </select>
 
-      <div class="DDM-Faction">Choose Faction: </div>
+      <div class="DDM-Faction">Choose Clan: </div>
       <select formControlName="faction">
-        <option value="" disabled selected hidden>Choose Faction</option>
+        <option value="" disabled selected hidden>Choose Clan</option>
         <option value="Tokugawa">Faction: Tokugawa</option>
         <option value="Oda">Faction: Oda</option>
         <option value="Takeda">Faction: Takeda</option>
       </select>
 
-      <div class="DDM-Rank">Choose Rank: </div>
+      <div class="DDM-Rank">Choose Horse: </div>
       <select formControlName="rank">
-        <option value="" disabled selected hidden>Choose Rank</option>
-        <option value="Daimyo">Rank: Daimyo</option>
-        <option value="Ronin">Rank: Ronin</option>
-        <option value="Shogun">Rank: Shogun</option>
+        <option value="" disabled selected hidden>Choose Horse</option>
+        <option value="Daimyo">Horse: Daimyo</option>
+        <option value="Ronin">Horse: Ronin</option>
+        <option value="Shogun">Horse: Shogun</option>
       </select>
 
-      <div class="DDM-Status">Choose Status: </div>
+      <div class="DDM-Status">Choose Armour: </div>
       <select formControlName="status">
         <option value="" disabled selected hidden>Choose Status</option>
         <option value="Alive">Status: Alive</option>
@@ -61,6 +59,10 @@
                 <th class="name">Name</th>
                 <th class="description">Description</th>
                 <th class="age">Age</th>
+                <th class="weapon">Weapon</th>
+                <th class="weapon">Horse</th>
+                <th class="weapon">Armour</th>
+                <th class="weapon">Clan</th>
                 <th class="action">Action</th>
               </tr>
             </thead>
@@ -69,6 +71,18 @@
                 <td class="name">{{ samurai.samuraiName }}</td>
                 <td class="description">{{ samurai.description }}</td>
                 <td class="age">{{ samurai.age }}</td>
+                <td class="weapon">
+                    <span *ngFor="let weapon of samurai.weapon">{{ weapon.weaponName }}</span>
+                  </td>
+                  <td class="horse">
+                    <span *ngFor="let horse of samurai.horse">{{ horse.horseName }}</span>
+                  </td>
+                  <!-- <td class="clan">
+                    <span *ngFor="let clan of samurai.clan">{{ clan.clanName }}</span>
+                  </td> -->
+                  <td class="armour">
+                    <span *ngFor="let armour of samurai.armour">{{ armour.armourName }}</span>
+                  </td>
                 <td>
                   <button type="button" class="btn-delete" (click)="deleteSamurai(samurai.samuraiId)">Delete</button>
                   <button type="button" class="btn-edit" (click)="editSamurai(samurai)">Edit</button>

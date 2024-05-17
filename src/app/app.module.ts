@@ -19,6 +19,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { CreateSamuraiComponent } from './components/create-samurai/create-samurai.component';
 import { HeaderComponent } from './components/header/header.component';
+import { GenericService } from './services/generic.service';
 
 
 
@@ -40,6 +41,7 @@ import { HeaderComponent } from './components/header/header.component';
     AdminPageComponent,
     CreateSamuraiComponent,
     HeaderComponent,
+    
 
 
 
@@ -51,6 +53,7 @@ import { HeaderComponent } from './components/header/header.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

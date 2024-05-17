@@ -1,8 +1,16 @@
 /* Reset styles */
-* {
+* 
+
+
+{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+.div-text{
+    display: flex;
+    font-size: 28px;
+    justify-content: center;
 }
 
 /* Main container styles */
@@ -45,6 +53,11 @@
     width: 100%;
     max-width: 800px; /* Adjust max-width as needed */
     margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 table {
@@ -67,11 +80,19 @@ th, td {
 .btn-delete {
     background-color: #ff6347;
     color: white;
+    border: none; /* Remove button border */
+    padding: 8px 16px; /* Add padding */
+    border-radius: 4px; /* Add border radius */
+    cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 .btn-edit, .update-button {
     background-color: #4caf50;
     color: white;
+    border: none; /* Remove button border */
+    padding: 8px 16px; /* Add padding */
+    border-radius: 4px; /* Add border radius */
+    cursor: pointer; /* Change cursor to pointer on hover */
 }
 
 .cancel-button {

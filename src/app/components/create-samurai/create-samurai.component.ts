@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Samurai } from 'src/app/models/Samurai';
 import { GenericService } from 'src/app/services/generic.service';
+import { Weapon } from 'src/app/models/Weapon';
 
 @Component({
   selector: 'app-create-samurai',
@@ -10,6 +11,7 @@ import { GenericService } from 'src/app/services/generic.service';
 })
 export class CreateSamuraiComponent {
   public samuraiList: Samurai[] = [];
+  public weapons: Weapon[] = [];
   samuraiVal?: Samurai;
   error: string = 'Name is required';
   public editForm: FormGroup;
@@ -20,17 +22,18 @@ export class CreateSamuraiComponent {
     samuraiName: new FormControl('', Validators.required),
     description: new FormControl('', [Validators.required, Validators.minLength(3)]),
     age: new FormControl(''),
-    
+    weapon: new FormControl(''),
   });
   
   
 
-  constructor(private service: GenericService<Samurai>,private formBuilder: FormBuilder) {
+  constructor(private service: GenericService<Samurai>, private weaponService: GenericService<Weapon>,private formBuilder: FormBuilder) {
     
       this.samuraiForm = this.formBuilder.group({
         samuraiName: ['', Validators.required],
         description: [''],
-        age: ['']
+        age: [''],
+       //weapon: ['']
       });
   
       this.editForm = this.formBuilder.group({
@@ -44,9 +47,10 @@ export class CreateSamuraiComponent {
       });
     }
   
-
+  
   ngOnInit(): void {
     this.getAll();
+    this.getWeapons();
   }
 
   public getAll(): void {
@@ -54,23 +58,34 @@ export class CreateSamuraiComponent {
       this.samuraiList = data;
     });
   }
+  public getWeapons(): void {
+    this.weaponService.getAll('weapon').subscribe(data => {
+      this.weapons = data;
+    });
+  }
 
   Create(): void {
     if (this.samuraiForm.valid) {
-      this.service.create(this.samuraiForm.value, 'samurai')
-        .subscribe({
-          next: (data) => {
-            this.samuraiList.push(data);
-            this.samuraiForm.reset();
-          },
-          error: (error) => {
-            console.error('Error creating samurai:', error);
-          }
-        });
+      // Extract the selected weapon ID from the form
+      const selectedWeaponId = this.samuraiForm.get('weapon')?.value;
+  
+      // Create the samurai data to send to the backend
+      const samuraiData = { ...this.samuraiForm.value, weaponId: selectedWeaponId };
+  
+      this.service.create(samuraiData, 'samurai').subscribe({
+        next: (data) => {
+          this.samuraiList.push(data);
+          this.samuraiForm.reset();
+        },
+        error: (error) => {
+          console.error('Error creating samurai:', error);
+        }
+      });
     } else {
       console.log('Form is invalid. Cannot create samurai.');
     }
   }
+  
 
   deleteSamurai(samuraiId: number | undefined): void {
     if (samuraiId !== undefined) {
