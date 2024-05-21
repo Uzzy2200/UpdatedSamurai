@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Horse } from 'src/app/models/Horse';
 import { GenericService } from 'src/app/services/generic.service';
 
@@ -7,29 +7,30 @@ import { GenericService } from 'src/app/services/generic.service';
   templateUrl: './horse.component.html',
   styleUrls: ['./horse.component.css']
 })
+export class HorseComponent implements OnInit {
+  horseList: Horse[] = [];
 
-export class HorseComponent {
-  horseList: Horse [] = [];
+  constructor(private service: GenericService<Horse>) {}
 
-
-  ngOnInit(): void{
-  
+  ngOnInit(): void {
     this.getAll();
- 
- }
- 
- constructor(private service: GenericService<Horse>) {
-     
- }
- 
- getAll(): void{
-  this.service.getAll('Horse').subscribe(data => {
-      this.horseList= data;
-      console.log(data)
-      console.log(this.horseList); }//end getAll
- 
- 
- 
- )};
-}
+  }
 
+  getAll(): void {
+    this.service.getAll('Horse').subscribe(data => {
+      this.horseList = data.map(horse => ({
+        ...horse,
+        imageUrl: this.getImageUrlForHorse(horse.horseName)
+      }));
+      console.log(data);
+      console.log(this.horseList);
+    });
+  }
+
+  getImageUrlForHorse(horseName: string): string {
+    // Construct the image URL based on the horse name
+    const imageUrl = `assets/img/${horseName.replace(/\s+/g, '').toLowerCase()}.jpg`;
+    console.log(`Image URL for ${horseName}: ${imageUrl}`);
+    return imageUrl;
+  }
+}

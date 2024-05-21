@@ -1,56 +1,65 @@
+// create-samurai.component.ts
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Samurai } from 'src/app/models/Samurai';
 import { GenericService } from 'src/app/services/generic.service';
 import { Weapon } from 'src/app/models/Weapon';
+import { Clan } from 'src/app/models/Clan';
+import { Horse } from 'src/app/models/Horse';
+import { Armour } from 'src/app/models/Armour';
 
 @Component({
   selector: 'app-create-samurai',
   templateUrl: './create-samurai.component.html',
   styleUrls: ['./create-samurai.component.css']
 })
-export class CreateSamuraiComponent {
+export class CreateSamuraiComponent implements OnInit {
   public samuraiList: Samurai[] = [];
   public weapons: Weapon[] = [];
-  samuraiVal?: Samurai;
-  error: string = 'Name is required';
+  public clans: Clan[] = [];
+  public horses: Horse[] = [];
+  public armours: Armour[] = [];
+  public samuraiForm: FormGroup;
   public editForm: FormGroup;
   public isEditing: boolean = false;
   public editedSamurai: Samurai | null = null;
+  error: string = 'Name is required';
 
-  samuraiForm: FormGroup = new FormGroup({
-    samuraiName: new FormControl('', Validators.required),
-    description: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    age: new FormControl(''),
-    weapon: new FormControl(''),
-  });
-  
-  
+  constructor(
+    private service: GenericService<Samurai>,
+    private weaponService: GenericService<Weapon>,
+    private clanService: GenericService<Clan>,
+    private armourService: GenericService<Armour>,
+    private horseService: GenericService<Horse>,
+    private formBuilder: FormBuilder
+  ) {
+    this.samuraiForm = this.formBuilder.group({
+      samuraiName: ['', Validators.required],
+      description: [''],
+      age: [''],
+      weapon: [''],
+      clan: [''],
+      horse: [''],
+      armour: ['']
+    });
 
-  constructor(private service: GenericService<Samurai>, private weaponService: GenericService<Weapon>,private formBuilder: FormBuilder) {
-    
-      this.samuraiForm = this.formBuilder.group({
-        samuraiName: ['', Validators.required],
-        description: [''],
-        age: [''],
-       //weapon: ['']
-      });
-  
-      this.editForm = this.formBuilder.group({
-        samuraiName: ['', Validators.required],
-        description: [''],
-        age: [''],
-        weapon: [''],
-        faction: [''],
-        rank: [''],
-        status: ['']
-      });
-    }
-  
-  
+    this.editForm = this.formBuilder.group({
+      samuraiName: ['', Validators.required],
+      description: [''],
+      age: [''],
+      weaponId: [''],
+      clanId: [''],
+      horseId: [''],
+      armourId: ['']
+    });
+  }
+
   ngOnInit(): void {
     this.getAll();
     this.getWeapons();
+    this.getClans();
+    this.getHorses();
+    this.getArmours();
   }
 
   public getAll(): void {
@@ -58,20 +67,46 @@ export class CreateSamuraiComponent {
       this.samuraiList = data;
     });
   }
+
   public getWeapons(): void {
     this.weaponService.getAll('weapon').subscribe(data => {
       this.weapons = data;
     });
   }
 
+  public getClans(): void {
+    this.clanService.getAll('clan').subscribe(data => {
+      this.clans = data;
+    });
+  }
+
+  public getArmours(): void {
+    this.armourService.getAll('armour').subscribe(data => {
+      this.armours = data;
+    });
+  }
+
+  public getHorses(): void {
+    this.horseService.getAll('horse').subscribe(data => {
+      this.horses = data;
+    });
+  }
+
   Create(): void {
     if (this.samuraiForm.valid) {
-      // Extract the selected weapon ID from the form
-      const selectedWeaponId = this.samuraiForm.get('weapon')?.value;
-  
-      // Create the samurai data to send to the backend
-      const samuraiData = { ...this.samuraiForm.value, weaponId: selectedWeaponId };
-  
+      const formValues = this.samuraiForm.value;
+
+      // Create a samurai with selected objects
+      const samuraiData: Samurai = {
+        samuraiName: formValues.samuraiName,
+        description: formValues.description,
+        age: formValues.age,
+        weapon: this.weapons.find(w => w.weaponId === formValues.weaponId),
+        clan: this.clans.find(c => c.clanId === formValues.clanId),
+        horse: this.horses.find(h => h.id === formValues.horseId),
+        // armour: this.armours.find(a => a.id === formValues.armourId)
+      };
+
       this.service.create(samuraiData, 'samurai').subscribe({
         next: (data) => {
           this.samuraiList.push(data);
@@ -85,7 +120,6 @@ export class CreateSamuraiComponent {
       console.log('Form is invalid. Cannot create samurai.');
     }
   }
-  
 
   deleteSamurai(samuraiId: number | undefined): void {
     if (samuraiId !== undefined) {
@@ -102,11 +136,16 @@ export class CreateSamuraiComponent {
     }
   }
 
-
   editSamurai(samurai: Samurai): void {
     this.isEditing = true;
     this.editedSamurai = samurai;
-    this.editForm.patchValue(samurai);
+    this.editForm.patchValue({
+      ...samurai,
+      weaponId: samurai.weapon?.weaponId,
+      clanId: samurai.clan?.clanId,
+      horseId: samurai.horse?.id,
+      // armourId: samurai.armour?.id
+    });
   }
 
   cancelEdit(): void {
@@ -117,8 +156,20 @@ export class CreateSamuraiComponent {
 
   updateSamurai(): void {
     if (this.editForm.valid && this.editedSamurai) {
-      const updatedSamurai: Samurai = { ...this.editedSamurai, ...this.editForm.value };
-      this.service.update(updatedSamurai, 'samurai', updatedSamurai.samuraiId).subscribe(data => {
+      const formValues = this.editForm.value;
+
+      const updatedSamurai: Samurai = {
+        ...this.editedSamurai,
+        samuraiName: formValues.samuraiName,
+        description: formValues.description,
+        age: formValues.age,
+        weapon: this.weapons.find(w => w.weaponId === formValues.weaponId),
+        clan: this.clans.find(c => c.clanId === formValues.clanId),
+        horse: this.horses.find(h => h.id === formValues.horseId),
+        // armour: this.armours.find(a => a.id === formValues.armourId)
+      };
+
+      this.service.update(updatedSamurai, 'samurai', updatedSamurai.samuraiId!).subscribe(data => {
         console.log('Samurai updated successfully:', data);
         this.getAll();
         this.cancelEdit();
@@ -129,6 +180,4 @@ export class CreateSamuraiComponent {
       console.error('Form is invalid or edited samurai is null.');
     }
   }
-
-  
 }

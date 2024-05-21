@@ -1,44 +1,43 @@
+<!-- create-samurai.component.html -->
 <div class="div-text">Create Samurai</div>
 <div class="form-Container">
   <form class="create-form" [formGroup]="samuraiForm" action="" (ngSubmit)="Create()">
     <input type="text" name="samuraiName" id="samuraiName" placeholder="name" formControlName="samuraiName">
-    <small><div *ngIf="samuraiForm.get('samuraiName')?.invalid && samuraiForm.get('samuraiName')?.touched">
-      {{error}}
-    </div></small>
+    <!-- <small *ngIf="samuraiForm.get('samuraiName')?.invalid &amp;&amp; samuraiForm.get('samuraiName')?.touched"></small> -->
     <input type="text" name="description" id="description" placeholder="description" formControlName="description">
     <input type="number" name="age" id="age" placeholder="age" formControlName="age">
 
     <div class="dropdown-container">
+        <!-- Weapons dropdown -->
         <div class="DDM-Weapon">Choose Weapon: </div>
         <select formControlName="weapon">
             <option value="" disabled selected hidden>Choose Weapon</option>
-            <option *ngFor="let weapon of weapons" [value]="weapon.weaponName">{{ weapon.weaponName }}</option>
-          </select>
-
-      <div class="DDM-Faction">Choose Clan: </div>
-      <select formControlName="faction">
-        <option value="" disabled selected hidden>Choose Clan</option>
-        <option value="Tokugawa">Faction: Tokugawa</option>
-        <option value="Oda">Faction: Oda</option>
-        <option value="Takeda">Faction: Takeda</option>
-      </select>
-
-      <div class="DDM-Rank">Choose Horse: </div>
-      <select formControlName="rank">
-        <option value="" disabled selected hidden>Choose Horse</option>
-        <option value="Daimyo">Horse: Daimyo</option>
-        <option value="Ronin">Horse: Ronin</option>
-        <option value="Shogun">Horse: Shogun</option>
-      </select>
-
-      <div class="DDM-Status">Choose Armour: </div>
-      <select formControlName="status">
-        <option value="" disabled selected hidden>Choose Status</option>
-        <option value="Alive">Status: Alive</option>
-        <option value="Deceased">Status: Deceased</option>
-        <option value="Unknown">Status: Unknown</option>
-      </select>
+            <option *ngFor="let weapon of weapons" [value]="weapon.weaponId">{{ weapon.weaponName }}</option>
+        </select>
+    
+        <!-- Clans dropdown -->
+        <div class="DDM-Clan">Choose Clan: </div>
+        <select formControlName="clan">
+            <option value="" disabled selected hidden>Choose Clan</option>
+            
+            <option *ngFor="let clan of clans" [value]="clan.clanId">{{ clan.clanName }}</option>
+        </select>
+    
+        <!-- Horses dropdown -->
+        <div class="DDM-Horse">Choose Horse: </div>
+        <select formControlName="horse">
+            <option value="" disabled selected hidden>Choose Horse</option>
+            <option *ngFor="let horse of horses" [value]="horse.id">{{ horse.horseName }}</option>
+        </select>
+    
+        <!-- Armours dropdown -->
+        <!-- <div class="DDM-Armour">Choose Armour: </div>
+        <select formControlName="armourId">
+            <option value="" disabled selected hidden>Choose Armour</option>
+            <option *ngFor="let armour of armours" [value]="armour.id">{{ armour.armourName }}</option>
+        </select> -->
     </div>
+    
 
     <button class="create-button" type="submit">Create Samurai</button>
   </form>
@@ -60,9 +59,9 @@
                 <th class="description">Description</th>
                 <th class="age">Age</th>
                 <th class="weapon">Weapon</th>
-                <th class="weapon">Horse</th>
-                <th class="weapon">Armour</th>
-                <th class="weapon">Clan</th>
+                <th class="horse">Horse</th>
+                <th class="armour">Armour</th>
+                <th class="clan">Clan</th>
                 <th class="action">Action</th>
               </tr>
             </thead>
@@ -71,31 +70,50 @@
                 <td class="name">{{ samurai.samuraiName }}</td>
                 <td class="description">{{ samurai.description }}</td>
                 <td class="age">{{ samurai.age }}</td>
-                <td class="weapon">
-                    <span *ngFor="let weapon of samurai.weapon">{{ weapon.weaponName }}</span>
-                  </td>
-                  <td class="horse">
-                    <span *ngFor="let horse of samurai.horse">{{ horse.horseName }}</span>
-                  </td>
-                  <!-- <td class="clan">
-                    <span *ngFor="let clan of samurai.clan">{{ clan.clanName }}</span>
-                  </td> -->
-                  <td class="armour">
-                    <span *ngFor="let armour of samurai.armour">{{ armour.armourName }}</span>
-                  </td>
+                <td class="weapon">{{ samurai.weapon?.weaponName }}</td>
+                <td class="horse">{{ samurai.horse?.horseName }}</td>
+                <!-- <td class="armour">{{ samurai.armour?.armourName }}</td> -->
+                <td class="clan">{{ samurai.clan?.clanName }}</td>
                 <td>
                   <button type="button" class="btn-delete" (click)="deleteSamurai(samurai.samuraiId)">Delete</button>
                   <button type="button" class="btn-edit" (click)="editSamurai(samurai)">Edit</button>
                 </td>
               </tr>
               <tr *ngIf="isEditing && editedSamurai === samurai">
-                <td colspan="4">
+                <td colspan="8">
                   <form [formGroup]="editForm" (ngSubmit)="updateSamurai()">
                     <input type="text" formControlName="samuraiName" placeholder="Name">
                     <input type="text" formControlName="description" placeholder="Description">
                     <input type="number" formControlName="age" placeholder="Age">
-                    <!-- Add dropdowns here -->
-  
+
+                    <!-- Weapons dropdown -->
+                    <div class="DDM-Weapon">Choose Weapon: </div>
+                    <select formControlName="weaponId">
+                        <option value="" disabled selected hidden>Choose Weapon</option>
+                        <option *ngFor="let weapon of weapons" [value]="weapon.weaponId">{{ weapon.weaponName }}</option>
+                    </select>
+                
+                    <!-- Clans dropdown -->
+                    <div class="DDM-Clan">Choose Clan: </div>
+                    <select formControlName="clanId">
+                        <option value="" disabled selected hidden>Choose Clan</option>
+                        <option *ngFor="let clan of clans" [value]="clan.clanId">{{ clan.clanName }}</option>
+                    </select>
+                
+                    <!-- Horses dropdown -->
+                    <div class="DDM-Horse">Choose Horse: </div>
+                    <select formControlName="horseId">
+                        <option value="" disabled selected hidden>Choose Horse</option>
+                        <option *ngFor="let horse of horses" [value]="horse.id">{{ horse.horseName }}</option>
+                    </select>
+                
+                    <!-- Armours dropdown -->
+                    <div class="DDM-Armour">Choose Armour: </div>
+                    <select formControlName="armourId">
+                        <option value="" disabled selected hidden>Choose Armour</option>
+                        <option *ngFor="let armour of armours" [value]="armour.id">{{ armour.armourName }}</option>
+                    </select>
+
                     <button type="submit" class="update-button">Save Changes</button>
                     <button type="button" class="cancel-button" (click)="cancelEdit()">Cancel</button>
                   </form>

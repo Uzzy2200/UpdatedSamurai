@@ -18,6 +18,7 @@ import { WarComponent } from './components/war/war.component';
 import { WeaponComponent } from './components/weapon/weapon.component';
 import { LoginComponent } from './login/login.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { CreateSamuraiComponent } from './components/create-samurai/create-samurai.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/frontpage', pathMatch: 'full' }, // Default route
@@ -31,7 +32,9 @@ const routes: Routes = [
   {path: 'rank', component: RankComponent },
   {path: 'war', component: WarComponent },
   {path: 'weapon', component: WeaponComponent },
-  {path: 'admin-page', component: AdminPageComponent}
+  {path: 'admin-page', component: AdminPageComponent},
+  {path: 'create-samurai', component: CreateSamuraiComponent}
+
 
   // Define other routes as needed
 ];

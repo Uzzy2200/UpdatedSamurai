@@ -36,6 +36,6 @@ export class LoginComponent {
     console.log('Hashed Password:', hashedPassword);
 
     // After successful authentication, navigate to another page
-    this.router.navigate(['/admin-page']);
+    this.router.navigate(['/create-samurai']);
   }
 }
